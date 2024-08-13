@@ -1,5 +1,5 @@
 # LLM-for-CheGeKa
-The repository is dedicated to scoring LLM and prompt-engineering approaches on CheGeKa task from [MERA](https://mera.a-ai.ru/ru/tasks/8) benchmark.
+The repository is dedicated to scoring LLM and prompt-engineering approaches on [CheGeKa](https://mera.a-ai.ru/ru/tasks/8) task from [MERA](https://mera.a-ai.ru/ru) benchmark.
 
 ## Features
 * Обращение к SOTA моделям через replicate
