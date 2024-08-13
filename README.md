@@ -24,6 +24,7 @@ Self Consistency мы использовали в комбинации с Chain 
 
 ## Results Table
 Responses were generated with Llama3-405B-instruct model
+Note: so far the scores were measured not on 416 questions from the test/closed part of the benchmark, but on 416 questions from the train part. This should be OK since we didn't perform any training/fine-tunning to improve the quality of model responses.
 | Approach    | Scores, f1 / exact match |
 | -------- | ------- |
 | As-is  | 0.444/0.139 |
