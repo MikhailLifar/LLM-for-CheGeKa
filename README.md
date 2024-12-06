@@ -2,22 +2,19 @@
 The repository is dedicated to scoring LLM and prompt-engineering approaches on [CheGeKa](https://mera.a-ai.ru/ru/tasks/8) task from [MERA](https://mera.a-ai.ru/ru) benchmark.
 
 ## Features
-* Обращение к SOTA моделям через replicate
-* Ассинхронная генерация ответов на большое число запросов
+* Querying SOTA LMs through replicate
+* Asynchronous generation of responses to a large number of queries
 
 ## Approaches
-Подходы, примененные для улучшения ответов языковых моделей
-* Simple Augment - Наложение дополнительных ограничений на промпт - дополнение запроса простыми инструкциями вроде “Пиши на русском”, “Отвечай коротко”
-и “Не используй пунктуацию”, а также использование жадной стратегии генерации вывода.
-* Chain of Thoughts (CoT) или "Думай пошагово" - добавление в конец промпта модели простой инструкции, побуждающей ее думать пошагово.
-* Extract Information - подход, похожий на CoT, с элементами мультиагентности. Первый агент пытается извлечь как можно больше информации об ответе из текста вопроса
-(является ли ответ предметом, действием, или свойством, к какой временной эпохе он/оно может относится и так далее). Второй агент на основе информации от первого генерирует окончательный ответ на вопрос.
-* Self-Consistency - многократная генерация ответа, в качестве окончательного ответа модели выдается самый популярный ответ среди сгенерированных.
-Self Consistency мы использовали в комбинации с Chain of Thoughts. Параметр метода - число генераций ответа.
-* Suggester-Discriminator - мультиагентный подход. Идея следующая - первый агент - генератор - генерирует ответ. Второй оценивает его по 10-бальной шкале. Если оценка ниже порога,
-то цикл генерация-оценка повторяется. Параметры метода - порог и максимальное число гененраций.
-* SDwCA - Suggester-Discriminator with Critical Analysis. Идея следующая - первый агент - генератор - генерирует ответ. Второй оценивает его по 10-бальной шкале. Если оценка слишком низкая, то еще один агент - критик - объясняет почему этот ответ не подошел. Затем генератор генерирует новый ответ с учетом всех предыдущих ответов и критик.
-* Command-Discussion - мультиагентная стратегия. Стратегия пытается имитировать обсуждение вопроса в команде. Идея следующая - один агент генерирует ответы на вопрос с пояснениями. Другой агент - критик - выдвигает обоснованную критику предложенного ответа. Каждый следующий ответ генератор генерирует с учетом предыдущих ответов и их критики. После генерации фиксированного числа ответов и критики к каждому из них, отдельный агент - капитан - анализирует ответы всех агентов и выдает окончательный ответ. Параметр метода - число генераций ответа.
+Approaches tried to improve the responses of language models
+* Simple Augment - Imposing additional restrictions on LMs output by supplementing the query with additional instructions like “Write in Russian”, “Answer briefly” and “Do not use punctuation”, as well as using a greedy output generation strategy.
+* Chain of Thoughts (CoT) or "Think step by step" - adding a simple instruction to the end of the LM's prompt, encouraging it to process the query step by step.
+* Extract Information - a CoT-like approach with multi-agent elements. The first agent tries to extract as much information about the answer as possible from the question text (whether the answer is an object, action, or property, to which time epoch he/she/it may belong, and so on). The second agent generates the final answer to the question based on the information from the first agent.
+* Self-Consistency - multiple answer generation, the most popular answer among the generated is the final answer of the model.
+We used Self Consistency in combination with Chain of Thoughts. The method parameter is the number of answer generations.
+* Suggester-Discriminator - multiagent approach. The idea is the following: the first agent, a generator, generates an answer. The second agent evaluates the answer on a 10-point scale. If the score is below the threshold, the generation-evaluation cycle repeats. The method parameters are the threshold and the maximum number of generations. 
+* SDwCA - Suggester-Discriminator with Critical Analysis. The idea is the following: the first agent, a generator, generates an answer. The second agent evaluates the answer on a 10-point scale. If the score is too low, then the third agent - the critic - explains why the answer did not fit. The generator then generates a new answer, taking into account all previous answers and criticism.
+* Command-Discussion - multiagent approach, aiming to mimic discussion in the team. The idea is the following - the first agent generates an answer to a question with explanations. Another agent, the critic, puts forward a reasoned criticism of the proposed answer. The generator generates each next answer taking into account the previous answers and their criticism. After generating a fixed number of responses and criticism for each of them, a separate agent - the captain - analyzes the responses of all agents and gives the final answer. The method parameter is the number of response generations.
 
 ## Future
 * Few shot
